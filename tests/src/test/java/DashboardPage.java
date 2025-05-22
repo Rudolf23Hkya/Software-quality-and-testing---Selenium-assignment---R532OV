@@ -6,9 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class DashboardPage extends BasePage {
     private By userMenuToggle = By.id("navbar-user");
     private By logoutButton   = By.xpath("//button[normalize-space(.)='Logout']");
-    //private By userboxPanel    = By.id("userbox-column-1");
-    private By logoutLink      = By.cssSelector("a[href='/account/logout']");
-
+    private By logoutLink = By.cssSelector("a[href='/account/logout']");
     public DashboardPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }

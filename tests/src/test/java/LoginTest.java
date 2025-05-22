@@ -13,22 +13,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 
-public class LoginTest {
+public class LoginTest extends BaseTest{
     private WebDriver driver;
     private WebDriverWait wait;
     private LoginPage loginPage;
 
-    private static final String LOGIN_URL      = "https://login.tauriwow.com/";
+    //private static final String LOGIN_URL      = "https://login.tauriwow.com/";
     private static final String LOGOUT_URL      = "https://login.tauriwow.com/?ref=https://tauriwow.com/";
-    private static final String VALID_EMAIL    = "rudolf23Hkya";
-    private static final String VALID_PASSWORD = "ElteTest123";
+    //private static final String VALID_EMAIL    = "rudolf23Hkya";
+    //private static final String VALID_PASSWORD = "ElteTest123";
 
     @Before
     public void setup() throws Exception {
         ChromeOptions options = new ChromeOptions();
+        // adjust the Selenium Hub URL as needed
         driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, 10);
+        // Selenium 3 style constructor: timeout in seconds
+        wait = new WebDriverWait(driver, 10L);
         loginPage = new LoginPage(driver, wait);
     }
 
@@ -54,7 +56,6 @@ public class LoginTest {
                     LOGOUT_URL,
                     driver.getCurrentUrl());
     }
-
     @After
     public void teardown() {
         if (driver != null) {
