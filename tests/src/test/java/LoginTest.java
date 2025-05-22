@@ -19,6 +19,7 @@ public class LoginTest {
     private LoginPage loginPage;
 
     private static final String LOGIN_URL      = "https://login.tauriwow.com/";
+    private static final String LOGOUT_URL      = "https://login.tauriwow.com/?ref=https://tauriwow.com/";
     private static final String VALID_EMAIL    = "rudolf23Hkya";
     private static final String VALID_PASSWORD = "ElteTest123";
 
@@ -41,10 +42,17 @@ public class LoginTest {
     }
 
     @Test
-    public void testFailedLogin() {
-        driver.get(LOGIN_URL);
-        loginPage.submitInvalidCredentials(VALID_EMAIL, "WrongPassword123");
-        assertTrue("Error message should display on failed login", loginPage.isErrorDisplayed());
+    public void testLogout() {
+        loginPage.open();
+        DashboardPage dashboard = loginPage.submitValidCredentials(VALID_EMAIL, VALID_PASSWORD);
+        assertTrue("Logout button should be visible after login",
+                dashboard.isLogoutButtonVisible());
+
+        loginPage = dashboard.clickLogout();
+        wait.until(ExpectedConditions.urlToBe(LOGOUT_URL));
+        assertEquals("Should redirect to login page after logout",
+                    LOGOUT_URL,
+                    driver.getCurrentUrl());
     }
 
     @After

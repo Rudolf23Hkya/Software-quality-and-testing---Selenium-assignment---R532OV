@@ -37,13 +37,6 @@ public class LoginPage {
         return new DashboardPage(driver, wait);
     }
 
-    public void submitInvalidCredentials(String username, String password) {
-        switchToEnglish();
-        enterUsername(username);
-        enterPassword(password);
-        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
-    }
-
     private void enterUsername(String username) {
         WebElement user = wait.until(ExpectedConditions.visibilityOfElementLocated(usernameField));
         user.clear();
