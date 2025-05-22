@@ -13,10 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.net.URL;
 
 public class LoginTest extends BaseTest{
-    //private static final String LOGIN_URL      = "https://login.tauriwow.com/";
-    private static final String LOGOUT_URL      = "https://login.tauriwow.com/?ref=https://tauriwow.com/";
-    //private static final String VALID_EMAIL    = "rudolf23Hkya";
-    //private static final String VALID_PASSWORD = "ElteTest123";
+    private static final String LOGOUT_URL = "https://login.tauriwow.com/?ref=https://tauriwow.com/";
 
     @Before
     public void setup() throws Exception {
@@ -34,8 +31,8 @@ public class LoginTest extends BaseTest{
         driver.get(LOGIN_URL);
         DashboardPage dashboard = loginPage.submitValidCredentials(VALID_EMAIL, VALID_PASSWORD);
         // verify redirection to main site after login
-        wait.until(ExpectedConditions.urlToBe("https://tauriwow.com/"));
-        assertEquals("Should redirect to homepage after login", "https://tauriwow.com/", driver.getCurrentUrl());
+        wait.until(ExpectedConditions.urlToBe(MAIN_URL));
+        assertEquals("Should redirect to homepage after login", MAIN_URL, driver.getCurrentUrl());
     }
 
     @Test
