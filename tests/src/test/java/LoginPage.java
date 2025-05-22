@@ -1,46 +1,62 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage extends BasePage {
-    private By emailField = By.id("gigya-loginID-120447766921773000");
-    private By passwordField = By.id("gigya-password-89694335567495600");
-    private By submitButton = By.cssSelector("input.gigya-input-submit[type='submit'][value='Log in']");
+public class LoginPage {
+    private WebDriver driver;
+    private WebDriverWait wait;
 
-
-    private By errorMessage = By.cssSelector(".login-error");
+    private static final String URL = "https://login.tauriwow.com/";
+    private By enLangButton    = By.xpath("//img[@alt='EN']");
+    private By usernameField   = By.id("account");
+    private By passwordField   = By.id("pass");
+    private By loginButton     = By.id("login");
+    private By errorMessage    = By.cssSelector(".error, .login-error");
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+        this.driver = driver;
+        this.wait   = wait;
     }
 
-    public void enterEmail(String email) {
-        waitVisibility(emailField).clear();
-        driver.findElement(emailField).sendKeys(email);
+    public void open() {
+        driver.get(URL);
     }
 
-    public void enterPassword(String password) {
-        waitVisibility(passwordField).clear();
-        driver.findElement(passwordField).sendKeys(password);
+    public void switchToEnglish() {
+        WebElement btn = wait.until(ExpectedConditions.elementToBeClickable(enLangButton));
+        btn.click();
     }
 
-    public DashboardPage submitValidCredentials(String email, String password) {
-        enterEmail(email);
-        System.out.println("email");
+    public DashboardPage submitValidCredentials(String username, String password) {
+        switchToEnglish();
+        enterUsername(username);
         enterPassword(password);
-        System.out.println("pw");
-        driver.findElement(submitButton).click();
-        System.out.println("submit");
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
         return new DashboardPage(driver, wait);
     }
 
-    public void submitInvalidCredentials(String email, String password) {
-        enterEmail(email);
+    public void submitInvalidCredentials(String username, String password) {
+        switchToEnglish();
+        enterUsername(username);
         enterPassword(password);
-        driver.findElement(submitButton).click();
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
+    }
+
+    private void enterUsername(String username) {
+        WebElement user = wait.until(ExpectedConditions.visibilityOfElementLocated(usernameField));
+        user.clear();
+        user.sendKeys(username);
+    }
+
+    private void enterPassword(String password) {
+        WebElement pass = wait.until(ExpectedConditions.visibilityOfElementLocated(passwordField));
+        pass.clear();
+        pass.sendKeys(password);
     }
 
     public boolean isErrorDisplayed() {
-        return waitVisibility(errorMessage).isDisplayed();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage)).isDisplayed();
     }
 }
