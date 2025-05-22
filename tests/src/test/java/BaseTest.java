@@ -6,9 +6,8 @@ public abstract class BaseTest {
     protected WebDriverWait wait;
     protected LoginPage loginPage;
 
-    protected static final String LOGIN_URL      = "https://login.tauriwow.com/";
-    protected static final String MAIN_URL = "https://tauriwow.com/";
-    protected static final String VALID_EMAIL    = "rudolf23Hkya";
-    protected static final String VALID_PASSWORD = "ElteTest123";
-
+    protected String LOGIN_URL = Config.loginUrl();
+    protected String MAIN_URL = Config.mainUrl();
+    protected String VALID_USERNAME    = Config.validUsername();
+    protected String VALID_PASSWORD = Config.validPassword();
 }

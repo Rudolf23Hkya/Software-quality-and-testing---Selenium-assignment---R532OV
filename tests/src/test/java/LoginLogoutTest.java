@@ -12,16 +12,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 
-public class LoginTest extends BaseTest{
-    private static final String LOGOUT_URL = "https://login.tauriwow.com/?ref=https://tauriwow.com/";
+public class LoginLogoutTest extends BaseTest{
+    private static final String LOGOUT_URL = Config.logoutUrl();
 
     @Before
     public void setup() throws Exception {
         ChromeOptions options = new ChromeOptions();
-        // adjust the Selenium Hub URL as needed
         driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
         driver.manage().window().maximize();
-        // Selenium 3 style constructor: timeout in seconds
         wait = new WebDriverWait(driver, 10L);
         loginPage = new LoginPage(driver, wait);
     }
@@ -29,20 +27,21 @@ public class LoginTest extends BaseTest{
     @Test
     public void testSuccessfulLogin() {
         driver.get(LOGIN_URL);
-        DashboardPage dashboard = loginPage.submitValidCredentials(VALID_EMAIL, VALID_PASSWORD);
-        // verify redirection to main site after login
+        DashboardPage dashboard = loginPage.submitValidCredentials(VALID_USERNAME, VALID_PASSWORD);
+        // Verify redirection to main site after login
         wait.until(ExpectedConditions.urlToBe(MAIN_URL));
-        assertEquals("Should redirect to homepage after login", MAIN_URL, driver.getCurrentUrl());
+        assertEquals("Should redirect to main page after login", MAIN_URL, driver.getCurrentUrl());
     }
 
     @Test
     public void testLogout() {
         loginPage.open();
-        DashboardPage dashboard = loginPage.submitValidCredentials(VALID_EMAIL, VALID_PASSWORD);
+        DashboardPage dashboard = loginPage.submitValidCredentials(VALID_USERNAME, VALID_PASSWORD);
         assertTrue("Logout button should be visible after login",
                 dashboard.isLogoutButtonVisible());
 
         loginPage = dashboard.clickLogout();
+        // The logout page is similiar to the Login page, but different URL
         wait.until(ExpectedConditions.urlToBe(LOGOUT_URL));
         assertEquals("Should redirect to login page after logout",
                     LOGOUT_URL,
