@@ -7,17 +7,12 @@ import org.junit.Test;
 
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 
 public class LoginTest extends BaseTest{
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private LoginPage loginPage;
-
     //private static final String LOGIN_URL      = "https://login.tauriwow.com/";
     private static final String LOGOUT_URL      = "https://login.tauriwow.com/?ref=https://tauriwow.com/";
     //private static final String VALID_EMAIL    = "rudolf23Hkya";
