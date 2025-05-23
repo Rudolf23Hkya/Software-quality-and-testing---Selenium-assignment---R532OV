@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 public class CharacterAhPage extends BasePage {
     private static final String URL = Config.characterAhUrl();
-    private By ilevelMinField    = By.id("filter-ilevel_min");
+    private By ilevelMinField = By.xpath("//div//input[@id='filter-ilevel_min']"); //Complex xpath
     private By auctPriceMinField = By.id("filter-auctprice_min");
     private By filterButton      = By.name("filter-filter");
     private By auctionRows       = By.cssSelector(".chah-auction");
