@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage extends BasePage {
+public class LoginPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -16,7 +16,8 @@ public class LoginPage extends BasePage {
     private By errorMessage    = By.cssSelector(".error, .login-error");
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
+        this.driver = driver;
+        this.wait   = wait;
     }
 
     public void open() {

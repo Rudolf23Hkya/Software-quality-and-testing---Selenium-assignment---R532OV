@@ -12,7 +12,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CharacterAhPageTests extends BaseTest{
+public class CharacterAhTests extends BaseTest{
     private String CHARACTER_AH_URL = Config.characterAhUrl();
     private String EXPECTED_TITLE = Config.expectedTitle();
 
