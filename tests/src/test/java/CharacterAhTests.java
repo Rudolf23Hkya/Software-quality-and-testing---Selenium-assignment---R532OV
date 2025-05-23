@@ -24,7 +24,7 @@ public class CharacterAhTests extends BaseTest {
         loginPage = new LoginPage(driver, wait);
         ahPage = new CharacterAhPage(driver, wait);
     }
-
+    // Static Page test
     @Test
     public void testCharacterAHStaticPageLoads() {
         // Login
@@ -38,7 +38,7 @@ public class CharacterAhTests extends BaseTest {
                      Config.characterAhUrl(),
                      driver.getCurrentUrl());
     }
-
+    // Reading the page title
     @Test
     public void testPageTitle() {
         loginPage.open();
@@ -50,7 +50,7 @@ public class CharacterAhTests extends BaseTest {
                      Config.expectedTitle(),
                      ahPage.getPageTitle());
     }
-
+    // Form sending with user
     @Test
     public void testCharacterAHForm() throws InterruptedException {
         loginPage.open();
