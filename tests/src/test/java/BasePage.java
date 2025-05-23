@@ -20,4 +20,8 @@ public abstract class BasePage {
     public String getPageTitle() {
         return driver.getTitle();
     }
+    public void navigateTo(String url) {
+        driver.get(url);
+        wait.until(ExpectedConditions.urlToBe(url));
+    }
 }
